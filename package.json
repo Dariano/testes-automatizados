@@ -1,0 +1,36 @@
+{
+  "name": "testes-automatizados",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-integration": "mocha --opts test/integration/mocha.opts test/integration/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dariano/testes-automatizados.git"
+  },
+  "keywords": [
+    "node",
+    "tests",
+    "integration"
+  ],
+  "author": "dariano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dariano/testes-automatizados/issues"
+  },
+  "homepage": "https://github.com/Dariano/testes-automatizados#readme",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "supertest": "^2.0.0"
+  }
+}
