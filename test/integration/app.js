@@ -24,4 +24,66 @@ describe('Routes Books', () => {
                 })
         });
     });
+
+    describe('Route GET /books/{id}', () => {
+        it('shoud return a book', done => {
+            request
+                .get('/books/1')
+                .end((err, res) => {
+                    expect(res.body.id).to.be.eql(defaultBook.id);
+                    expect(res.body.name).to.be.eql(defaultBook.name);
+
+                    done(err);
+                })
+        });
+    });
+
+    describe('Route POST /books', () => {
+        it('shoud create a book', done => {
+            const newBook = {
+                id: 2,
+                name: 'newBook'
+            };
+
+            request
+                .post('/books')
+                .send(newBook)
+                .end((err, res) => {
+                    expect(res.body.id).to.be.eql(newBook.id);
+                    expect(res.body.name).to.be.eql(newBook.name);
+
+                    done(err);
+                });
+        });
+    });
+
+    describe('Route PUT /books/{id}', () => {
+        it('shoud update a book', done => {
+            const updateBook = {
+                id: 1,
+                name: 'update book'
+            };
+
+            request
+                .put('/books/' + updateBook.id)
+                .send(updateBook)
+                .end((err, res) => {
+                    expect(res.body).to.be.eql([1]);
+
+                    done(err);
+                });
+        });
+    });
+
+    describe('Route DELETE /books/{id}', () => {
+        it('shoud delete a book', done => {
+            request
+                .delete('/books/' + defaultBook.id)
+                .end((err, res) => {
+                    expect(res.statusCode).to.be.eql(204);
+
+                    done(err);
+                });
+        });
+    });
 });
