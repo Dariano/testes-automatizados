@@ -65,7 +65,7 @@ describe('Routes Books', () => {
       };
 
       request
-                .put('/books/$(updateBook.id)')
+                .put(`/books/${updateBook.id}`)
                 .send(updateBook)
                 .end((err, res) => {
                   expect(res.body).to.be.eql([1]);
@@ -78,7 +78,7 @@ describe('Routes Books', () => {
   describe('Route DELETE /books/{id}', () => {
     it('shoud delete a book', (done) => {
       request
-                .delete('/books/$(defaultBook.id)')
+                .delete(`/books/${defaultBook.id}`)
                 .end((err, res) => {
                   expect(res.statusCode).to.be.eql(204);
 

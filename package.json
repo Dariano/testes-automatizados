@@ -7,6 +7,7 @@
     "start": "babel-node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test-integration": "mocha --opts test/integration/mocha.opts test/integration/*.js",
+    "test-unit": "mocha --opts test/unit/mocha.opts test/unit/**/*.js",
     "lint": "eslint '**/*.js'",
     "lint:fix": "eslint '**/*.js' --fix"
   },
@@ -42,6 +43,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
     "mocha": "^3.0.2",
-    "supertest": "^2.0.0"
+    "supertest": "^2.0.0",
+    "testdouble": "^1.7.0"
   }
 }
