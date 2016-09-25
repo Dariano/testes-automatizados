@@ -10,7 +10,7 @@ export default {
     },
   },
   jwtSecret: 'Secr3t',
-  jwtSession: { 
-    session: false
+  jwtSession: {
+    session: false,
   },
 };

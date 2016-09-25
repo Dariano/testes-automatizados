@@ -1,15 +1,35 @@
+import jwt from 'jwt-simple';
+
 describe('Routes Books', () => {
   const Books = app.datasource.models.Books;
+  const Users = app.datasource.models.Users;
+  const jwtSecret = app.config.jwtSecret;
+
   const defaultBook = {
     id: 1,
     name: 'Default Book',
   };
 
+  let token;
+
   beforeEach((done) => {
-    Books
-        .destroy({ where: {} })
-        .then(() => Books.create(defaultBook))
-        .then(() => done());
+    Users
+      .destroy({ where: {} })
+      .then(() => Users.create({
+        name: 'Joao',
+        email: 'joao@mail.com',
+        password: 'test123',
+      }))
+      .then((user) => {
+        Books
+          .destroy({ where: {} })
+          .then(() => Books.create(defaultBook))
+          .then(() => {
+            token = jwt.encode({ id: user.id }, jwtSecret);
+
+            done();
+          });
+      });
   });
 
   describe('Route GET /books', () => {
@@ -23,6 +43,7 @@ describe('Routes Books', () => {
 
       request
             .get('/books')
+            .set('Authorization', `JWT ${token}`)
             .end((err, res) => {
               joiAssert(res.body, booksList);
 
@@ -42,6 +63,7 @@ describe('Routes Books', () => {
 
       request
         .get('/books/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           joiAssert(res.body, booksList);
 
@@ -66,6 +88,7 @@ describe('Routes Books', () => {
 
       request
         .post('/books')
+        .set('Authorization', `JWT ${token}`)
         .send(newBook)
         .end((err, res) => {
           joiAssert(res.body, booksList);
@@ -86,6 +109,7 @@ describe('Routes Books', () => {
 
       request
         .put(`/books/${updateBook.id}`)
+        .set('Authorization', `JWT ${token}`)
         .send(updateBook)
         .end((err, res) => {
           joiAssert(res.body, udpateCount);
@@ -99,6 +123,7 @@ describe('Routes Books', () => {
     it('shoud delete a book', (done) => {
       request
         .delete(`/books/${defaultBook.id}`)
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(204);
 
