@@ -51,6 +51,7 @@
     "joi": "^9.0.4",
     "joi-assert": "0.0.3",
     "mocha": "^3.0.2",
+    "nodemon": "^1.11.0",
     "supertest": "^2.0.0",
     "testdouble": "^1.7.0"
   }
