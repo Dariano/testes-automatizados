@@ -7,7 +7,7 @@ services:
     environment:
       NODE_ENV: development
     ports:
-      - 7000:3000
+      - 80:7000
     volumes:
      - .:/home/app/testes-automatizados
      - /home/app/testes-automatizados/node_modules
